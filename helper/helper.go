@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Christopher John
 func Upper(str string) string {
 	words := strings.Fields(str)
 
@@ -32,58 +33,6 @@ func Upper(str string) string {
 
 	return strings.Join(words, " ")
 }
-
-// func Upper(s string) string {
-// 	ssplit := strings.Fields(s)
-// 	for i := 0; i < len(ssplit); i++ {
-// 		if strings.HasPrefix(ssplit[i], "(up") {
-
-// 			cleanedi := strings.Trim(ssplit[i], "()")
-// 			sepi := strings.Split(cleanedi, ",")
-
-// 			count := 1
-
-// 			if len(sepi) > 1 {
-// 				num, err := strconv.Atoi(strings.TrimSpace(sepi[1]))
-// 				if err == nil {
-// 					count = num
-// 				}
-// 			}
-// 			for j := 1; j <= count; j++ {
-// 				if i-j < 0 {
-
-// 					break
-// 				}
-// 				ssplit[i-j] = strings.TrimSpace(ssplit[i-j])
-
-// 				ssplit[i-j] = strings.ToUpper(ssplit[i-j])
-
-// 			}
-// 			ssplit = append(ssplit[:i], ssplit[i+1:]...)
-// 			i--
-// 		}
-// 	}
-// 	result := strings.Join(ssplit, " ")
-// 	return result
-// }
-
-// func FixArticle(s string) string {
-
-// 	ssplit := strings.Fields(s)
-// 	vowels := "aeiouAEIOU"
-// 	for i := 1; i < len(ssplit); i++ {
-// 		if strings.ContainsAny(string(ssplit[i][0]), vowels) {
-
-// 			if string(ssplit[i-1]) == "a" {
-// 				ssplit[i-1] = "an"
-
-// 			}
-// 		}
-
-// 	}
-// 	return strings.Join(ssplit, " ")
-
-// }
 
 func FixAToAn(text string) string {
 	words := strings.Fields(text)
@@ -127,55 +76,56 @@ func FixAToAn(text string) string {
 }
 
 // Benedict Onyeke(bonyeke)
-// func FixSingleQuotes(text string) string {
-// 	text = strings.Trim(text, "'")
+func FixSingleQuotes(text string) string {
+	text = strings.Trim(text, "'")
 
-// 	text = strings.TrimSpace(text)
+	text = strings.TrimSpace(text)
 
-// 	return "'" + text + "'"
-// }
-// Code From Roland Elaigwu(relaigwu)
-
-func FixQuotes(s string) string {
-	r := []rune(s)
-	var res []rune
-	inQuote := false
-
-	for i := 0; i < len(r); i++ {
-
-		if r[i] == '\'' {
-
-			if !inQuote {
-				if len(res) > 0 && res[len(res)-1] != ' ' {
-					res = append(res, ' ')
-				}
-				res = append(res, '\'')
-				inQuote = true
-
-				i++
-				for i < len(r) && r[i] == ' ' {
-					i++
-				}
-				i--
-
-			} else {
-				if len(res) > 0 && res[len(res)-1] == ' ' {
-					res = res[:len(res)-1]
-				}
-				res = append(res, '\'')
-				inQuote = false
-			}
-			continue
-		}
-
-		res = append(res, r[i])
-	}
-
-	return string(res)
+	return "'" + text + "'"
 }
 
+// Code From Roland Elaigwu(relaigwu)
+
+// func FixQuotes(s string) string {
+// 	r := []rune(s)
+// 	var res []rune
+// 	inQuote := false
+
+// 	for i := 0; i < len(r); i++ {
+
+// 		if r[i] == '\'' {
+
+// 			if !inQuote {
+// 				if len(res) > 0 && res[len(res)-1] != ' ' {
+// 					res = append(res, ' ')
+// 				}
+// 				res = append(res, '\'')
+// 				inQuote = true
+
+// 				i++
+// 				for i < len(r) && r[i] == ' ' {
+// 					i++
+// 				}
+// 				i--
+
+// 			} else {
+// 				if len(res) > 0 && res[len(res)-1] == ' ' {
+// 					res = res[:len(res)-1]
+// 				}
+// 				res = append(res, '\'')
+// 				inQuote = false
+// 			}
+// 			continue
+// 		}
+
+// 		res = append(res, r[i])
+// 	}
+
+// 	return string(res)
+// }
+
 // Code from Excel
-func TransformText(s string) string {
+func ToLower(s string) string {
 	slice := strings.Fields(s)
 	for i := 0; i < len(slice); i++ {
 		if slice[i] == "(low)" {
@@ -261,4 +211,9 @@ func BinTodecimal(bin string) string {
 	}
 	return strings.TrimSpace(strings.Join(strings.Fields(strings.Join(words, " ")), " "))
 
+}
+
+func FixPunct(s string) string {
+	s = strings.NewReplacer(" .", ".", " ?", "?", " ,", ", ").Replace(s)
+	return s
 }
